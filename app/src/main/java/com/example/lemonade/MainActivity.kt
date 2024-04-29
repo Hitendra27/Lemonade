@@ -32,6 +32,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.lemonade.ui.theme.LemonadeTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +98,29 @@ fun TopBar(
 //    }
 //
 //}
+
+@Composable
+fun LemonadeImageClick(
+    modifier: Modifier = Modifier,
+) {
+    var result by remember { mutableStateOf(1) }
+    var imageResource = when (result) {
+        1 -> R.drawable.lemon_tree
+        2 -> R.drawable.lemon_squeeze
+        3 -> R.drawable.lemon_drink
+        else -> R.drawable.lemon_restart
+    }
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = imageResource),
+            contentDescription = result.toString())
+        modifier = Modifier
+            .clickable {  }
+    }
+}
 
 
 @Preview(showBackground = true)
