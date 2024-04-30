@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.example.lemonade.ui.theme.LemonadeTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 
 class MainActivity : ComponentActivity() {
@@ -73,7 +75,7 @@ fun TopBar(
         fontWeight = FontWeight.ExtraBold,
         textAlign = TextAlign.Center,
         modifier = modifier
-            .background(Color.Yellow)
+            .background(Color.Yellow.copy(alpha = 0.6f))
             .padding(top = 25.dp, bottom = 16.dp)
             .height(40.dp)
             .fillMaxWidth()
@@ -115,16 +117,7 @@ fun LemonadeImageClick(
         3 -> R.drawable.lemon_drink
         else -> R.drawable.lemon_restart
     }
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = imageResource),
-            contentDescription = result.toString())
-//        modifier = Modifier
-//            .clickable {  }
-    }
+
 }
 
 @Composable
@@ -142,9 +135,18 @@ fun LemonImageAndText(
     ) {
         Image(
             painter = imagePainter,
-            contentDescription = null
+            contentDescription = null,
+            modifier
+                .padding(10.dp)
+                .background(color = Color.Green)
+                .clip(RoundedCornerShape(25.dp))
+                .clickable {  }
         )
-        Text(text = imageText)
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = imageText,
+            fontSize = 18.sp
+        )
         
     }
     
