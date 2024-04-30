@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.example.lemonade.ui.theme.LemonadeTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.painter.Painter
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +57,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonadeApp() {
     TopBar(text = stringResource(R.string.app_name))
+    LemonImageAndText(
+        imagePainter = painterResource(R.drawable.lemon_tree),
+        imageText = stringResource(R.string.lemon_tree) )
 }
 
 @Composable
@@ -117,9 +122,32 @@ fun LemonadeImageClick(
         Image(
             painter = painterResource(id = imageResource),
             contentDescription = result.toString())
-        modifier = Modifier
-            .clickable {  }
+//        modifier = Modifier
+//            .clickable {  }
     }
+}
+
+@Composable
+fun LemonImageAndText(
+    imagePainter: Painter,
+    imageText: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        Image(
+            painter = imagePainter,
+            contentDescription = null
+        )
+        Text(text = imageText)
+        
+    }
+    
 }
 
 
